@@ -1,0 +1,96 @@
+<<Documentation
+Name : **********
+Date : 
+Description : Write a script to print system information using commands
+Sample I/P  :
+  1. Currently logged users
+  2. Your shell directory
+  3. Home directory
+  4. OS name & version
+  5. Current working directory
+  6. Number of users logged in
+  7. Show all available shells in your system
+  8. Hard disk information
+  9. CPU information.
+  10. Memory Informations
+  11. File system information.
+  12. Currently running process.
+  Enter the choice : 2
+  Do you want to continue (y/n) ? y
+  1. Currently logged users
+  2. Your shell directory
+  3. Home directory
+  4. OS name & version
+  5. Current working directory
+  6. Number of users logged in
+  7. Show all available shells in your system
+  8. Hard disk information
+  9. CPU information.
+  10. Memory Informations
+  11. File system information.
+  12. Currently running process.
+  Enter the choice : 13
+  Do you want to continue(y/n) ? n
+Sample O/P  : 1. Your shell directory is /bin/bash
+              2.  Error : Invalid option, please enter valid option
+
+Documentation
+
+#! /bin/bash
+
+flag=1                                                 #assigning the value of 1 in flag
+while [ $flag -eq 1 ]                                  #Loop wil run when the flag is equal to 1
+do
+    echo "1. Currently logged users"                   #printing the menu for user
+    echo "2. Your shell directory"
+    echo "3. Home directory"
+    echo "4. OS name & version"
+    echo "5. Current working directory "
+    echo "6. Number of users logged in "
+    echo "7. Show all available shells in your system"
+    echo "8. Hard disk information"
+    echo "9. CPU information."
+    echo "10. Memory Informations"
+    echo "11. File system information."
+    echo "12. Currently running process."
+
+
+read -p "Enter the choice : " choice                           #Reading the option from the user
+    case $choice in                                            # According to the option case will jump to th option and print the corresponding information
+        1) echo "Currently logged users is $USER"              #print Currently logged users
+            ;;
+        2) echo "Your shell directory is $SHELL"               #print Your shell directory
+            ;;
+        3) echo "Home directory is $HOME"                      #print Home directory
+            ;;
+        4) echo "OS name is `uname -r`"
+            echo "OS version is `uname -v`"                    #print OS name & version
+            ;;
+        5) echo "Current working directory is $PWD"            #print Current working directory
+            ;;
+        6) echo "Number of users logged in is `who |wc -l`"    #print Number of users logged in
+            ;;
+        7) echo "Showing all available shells in your system is `cat /etc/shells`"              #print Show all available shells in your system
+            ;;
+        8) echo "Hard disk information is `df -h`"             #print Hard disk information 
+            ;;
+        9) echo "CPU information is `cat /proc/cpuinfo`"       #print Memory Informations
+            ;;
+        10) echo "Memory Informations is `cat /proc/meminfo`"  #print CPU information
+            ;;
+        11) echo "File system information is `df -Th`"         #print File system information.
+            ;;
+        12) echo "Currently running process is `ps -aux`"       #print Currently running process
+            ;;
+        *) echo "Error : Invalid option, please enter valid option"                       # Default case
+            ;;
+    esac
+read -p "Do you want to continue(y/n) ? " yn                                              #reading the value from the user
+
+if [ $yn = "y" -o $yn = "Y" ]                                                             #condition to check the user input to continue
+then
+    flag=1                                                                                #value of flag is set to 1 if the condition is true
+else
+    flag=0                                                                                #value of flag is set to 0 if the codition is false
+fi
+done
