@@ -1,0 +1,19 @@
+#!/bin/bash
+<<Documentation
+Name:Akhil Ajith K C
+Date:15/09/2022
+Description:Read n numbers and print the pattern
+Sample_i/p:4
+sample_o/p:1 to 4 in triangle form
+Documentation
+
+read -p "Enter the number:" n   #Read n numbers
+                                #Nested loop for rows and columns
+for i in `seq $n`               #loop will run depending on the $n value
+do
+    for j in `seq $i`           #loop will run depending on the $i value
+    do
+        echo -n "$j "           #Print the value of j
+    done
+    echo                        #Enter newline
+done
