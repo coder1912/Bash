@@ -1,0 +1,26 @@
+#!/bin/bash
+<<Documentation
+Name:*** ****** **
+Date:
+Description:Read n numbers and print the pattern
+Sample_i/p:4
+sample_o/p:
+1 
+2 3 
+4 5 6 
+7 8 9 10 
+Documentation
+
+count=1                                  #Assigning value 1 in count
+read -p "Enter the number:" n            #Reading value for n
+
+for i in `seq $n`                        #Loop will run depending on the $n value
+do
+    for j in `seq $i`                    #Loop will run depending on the $i value
+    do    
+        echo -n "$count "                #Print the value in count
+
+        count=$(( $count + 1 ))          #Increment the value of count
+    done
+    echo                                 #Enter newline
+done
