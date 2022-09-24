@@ -1,0 +1,63 @@
+#!/bin/bash
+<<Documentation
+Name:***** ****
+Date:
+Description:Write a script to perform arithmetic operation on digits of a given number
+Sample_i/p:
+operator_dependent.sh 1234+:
+operator_dependent.sh 8312-
+operator_dependent.sh 5487
+operator_dependent.sh 1111x
+operator_dependent.sh 12/
+operator_dependent.sh
+sample_o/p:
+Sum of digits = 10
+Subtraction of digits = 2
+Error: Operator missing or invalid operator, please pass operator as last digit (+,-,x,/)
+Multiplication of digits = 1
+Division of digits = .50
+Error : Please pass the arguments through CL.
+Usage : ./operator_dependent.sh 2345+
+Documentation
+var=$1                                                       # Storing 1st value of command line argument in var.                         
+len=${#var}                                                  # Storing the length of var
+op=${var: -1}                                                # Storing last digit in op.
+res=${var:0:1}                                               # Storing first digit in res.
+if [ $# -gt 0 ]                                              # Checking the count of command line argument is greater than zero or not.
+then
+        case $op in                                          #If last digit is an operator then it will jump to the specific case.
+                +)for i in `seq 1 $(( $len - 2 ))`           # Depends upon the 'len-2' the loop wil run.
+                  do
+                        res=`echo "$res + ${var:$i:1}" | bc`  # Adding the digits and stores in res.
+                  done
+                  echo "Sum of digits = $res"                 # Print the result.
+                ;;
+
+                -)for i in `seq 1 $(( $len - 2 ))`            # Depends upon the 'len-2' the loop wil run.
+                  do
+                        res=`echo "$res - ${var:$i:1}" | bc`  # Substracting the digits and stores in res.
+                  done
+                  echo "Subtraction of digits = $res"         # Print the result.
+
+                ;;
+
+                x)for i in `seq 1 $(( $len - 2 ))`               # Depends upon the 'len-2' the loop wil run.
+                  do
+                        res=`echo "$res * ${var:$i:1}" | bc`     # Multiplying the digits and stores in res.
+                  done
+                  echo "Multiplication of digits = $res"         # Print the result.
+                ;;
+
+                /)for i in `seq 1 $(( $len - 2 ))`                      # Depends upon the 'len-2' the loop wil run.
+                  do
+                        res=`echo "scale=2;$res / ${var:$i:1}" | bc`    # Dividing the digits and stores in res.
+                  done
+                  echo "Division of digits = $res"                      # Print the result.
+                ;;
+                
+                *) echo "Error: Operator missing or invalid operator, please pass operator as last digit (+,-,x,/)"    # Invalid if the last digit is not an operator it throws the result.
+                ;;
+        esac
+else
+        echo "Error : Please pass the arguments through CL.Usage : ./operator_dependent.sh 2345+"      # If the count of command line argument is not greater than zero else part executes.
+fi
