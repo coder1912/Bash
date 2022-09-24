@@ -1,0 +1,23 @@
+#!/bin/bash
+<<Documentation
+Name:***********
+Date:
+Description:Script to print the length of each and every string using arrays
+Sample_i/p:hello hai
+sample_o/p:
+Length of string (hello) - 5
+Length of string (hai) - 3
+Documentation
+
+
+
+arr=($@)                                                      # Storing values of command line argument to array.
+if [ $# -gt 0 ]                                                 # Checking the total number of command line argument is greater than zero or not.
+then
+    for i in `seq 0 $((${#arr[@]}-1))`                        #Loop will run depending upon the value of 'arr-1'.
+        do  
+            echo "Length of string (${arr[$i]}) - ${#arr[$i]}"      # Print the length of each string in the array.
+        done 
+else                                                                    # If command line argument not greater than zero.
+    echo "Error : Please pass the arguments through command-line."      # Printing error message.
+fi
